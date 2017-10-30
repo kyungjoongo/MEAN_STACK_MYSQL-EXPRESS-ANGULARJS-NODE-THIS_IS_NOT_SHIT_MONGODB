@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css'/>
+    <script src="/javascripts/jquery3.js"></script>
+
+    <script src="/javascripts/bootstrap.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            //  alert("ready!");
+        });
+
+    </script>
+</head>
+<body>
+
+
+<div id="comments">
+
+    <div class="container">
+        <table class="table table-hover table-info table-bordered table-success">
+            <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+
+            </tr>
+            </thead>
+
+            <% result.forEach(function(resultOne) { %>
+            <tr>
+                <td>
+                    <%= resultOne.firstName %>
+                </td>
+                <td>
+                    <%= resultOne.lastName %>
+                </td>
+            </tr>
+            <% }); %>
+
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

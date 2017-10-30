@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>receipeList</title>
+    <% include ./common.ejs %>
+    <script>
+
+
+        $(document).ready(function () {
+            // alert("ready!");
+        });
+
+        angular.module('myApp', [])
+            .controller('myAppCtrl', function ($scope, $http) {
+                $scope.greeting = "Hello World";
+
+                $scope.clickedImage = function (contentOne) {
+
+                    //alert('sdlfksdlfklsdkf');
+
+                    alert(contentOne.title);
+
+                }
+
+
+                $http.get("/receipeListToJson")
+                    .then(function (response) {
+                        //First function handles success
+                        $scope.content = response.data;
+                    }, function (response) {
+                        //Second function handles error
+                        $scope.content = "Something went wrong";
+                    });
+
+
+            });
+
+
+
+    </script>
+
+</head>
+<body ng-app="myApp">
+
+
+<div id="comments" ng-controller="myAppCtrl">
+
+    <div class="container">
+
+        {{greeting}}
+
+        <!--{{content | json  }}-->
+
+        <table class="table table-hover table-info table-bordered table-success">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">iamge</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+
+            </tr>
+            </thead>
+
+            <tr ng-repeat="contentOne in content">
+                <td>
+
+                    <img ng-click="clickedImage(contentOne)" style="width: 150px;height: 150px"
+                         src="http://35.201.241.181:3000/receipe/imageView?id=%27{{contentOne.image}}%27">
+
+
+                </td>
+                <td>
+                    {{contentOne.title}}
+                </td>
+                <td>
+                    {{contentOne.material}}
+                </td>
+            </tr>
+
+            <!-- <% result.forEach(function(resultOne) { %>
+            <tr>
+                <td>
+
+                    <img style="width: 150px;height: 150px"
+                         src="http://35.201.241.181:3000/receipe/imageView?id=%27<%= resultOne.image %>%27">
+
+                </td>
+                <td>
+                    <%= resultOne.title %>
+                </td>
+                <td>
+                    <%= resultOne.material %>
+                </td>
+
+            </tr>
+            <% }); %>-->
+
+        </table>
+
+    </div>
+</div>
+
+</body>
+
+
+</html>
